@@ -12,7 +12,7 @@ namespace Sea_War
 {
     public partial class Form1 : Form
     {
-        public const int mapSize = 11;
+        public const int mapSize = 12;
         public int cellSize = 45;
         public string alphabet = "АБВГДЕЖЗИК";
         public Form1()
@@ -45,16 +45,20 @@ namespace Sea_War
                     button.BackColor = Color.FromArgb(213, 223, 242);
                     button.Tag = new List<int> { i, j };
                     button.Name = "myButton" + i + j;
+                    if(i==11||j==11)
+                    {
+                        button.Visible = false;
+                    }
                     MyGroupBox.Controls.Add(button);
                     button.Click += new EventHandler(PlayerClick); 
                     if (i == 0||j==0)
                     {
                         button.BackColor = Color.White;
-                        if (i == 0&&j>0)
+                        if (i == 0&&j>0&&j<11)
                         {
                             button.Text = alphabet[j-1].ToString();
                         }
-                        if(j==0&&i>0)
+                        if(j==0&&i>0&&i<11)
                         {
                             button.Text = i.ToString();
                         }
@@ -72,15 +76,19 @@ namespace Sea_War
                     button.Size = new Size(cellSize, cellSize);
                     button.BackColor = Color.FromArgb(213, 223, 242);
                     button.Name = "eButton" + i + j;
+                    if (i == 11 || j == 11)
+                    {
+                        button.Visible = false;
+                    }
                     EnemyGroupBox.Controls.Add(button);
                     if (i == 0 || j == 0)
                     {
                         button.BackColor = Color.White;
-                        if (i == 0 && j>0)
+                        if (i == 0 && j>0&&j<11)
                         {
                             button.Text = alphabet[j-1].ToString();
                         }
-                        if (j == 0 && i > 0)
+                        if (j == 0 && i > 0&&i<11)
                         {
                             button.Text = i.ToString();
                         }
@@ -110,40 +118,20 @@ namespace Sea_War
                     {
                         if (deck1 > 0)
                         {
-                            if(i==10)
+                            bool flag = true;
+                            for(int iCords = i-1;iCords<=i+1;iCords++)
                             {
-                                if(j==10)
+                                for (int jCords = j-1; jCords <= j+1; jCords++)
                                 {
-                                    if(myMap[i-1,j-1]==0&& myMap[i - 1, j] == 0 && myMap[i, j - 1] == 0 && myMap[i,j] == 0)
-                                    {
-                                        myMap[i, j] = 1;
-                                        (Controls["myButton" + i + j] as Button).BackColor = Color.FromArgb(149, 104, 222);
-                                        deck1--;
-                                    }
-                                }
-                                else if(myMap[i-1,j-1]==0&&myMap[i-1,j+1]==0)
-                                {
-                                    myMap[i, j] = 1;
-                                    (Controls["myButton" + i + j] as Button).BackColor = Color.FromArgb(149, 104, 222);
-                                    deck1--;
+                                    if (myMap[iCords, jCords] == 1) { flag = false; }
                                 }
                             }
-                            else if(j==10)
-                            {
-                                if (myMap[i - 1, j - 1] == 0 && myMap[i + 1, j - 1] == 0)
-                                {
-                                    myMap[i, j] = 1;
-                                    (Controls["myButton" + i + j] as Button).BackColor = Color.FromArgb(149, 104, 222);
-                                    deck1--;
-                                }
-                            }
-                            else if(myMap[i-1, j-1] == 0 && myMap[i+1,j-1] == 0&&myMap[i-1,j+1] == 0 && myMap[i+1,j+1] == 0)
+                            if (flag == true)
                             {
                                 myMap[i, j] = 1;
                                 (Controls["myButton" + i + j] as Button).BackColor = Color.FromArgb(149, 104, 222);
                                 deck1--;
-                            }
-                            
+                            }                          
                         }
                         break;
                     }
@@ -156,13 +144,27 @@ namespace Sea_War
                             {
                                 if (i + deck <= 11)
                                 {
-                                    deck2--;
-                                    for (int iter = 0; iter < deck; iter++)
+                                    bool flag = true;
+                                    for (int iCell = i; iCell < i + deck; iCell++)
                                     {
-                                        int line = iter + i;
-                                        myMap[line, j] = 1;
-                                        (Controls["myButton" + line + j] as Button).BackColor = Color.FromArgb(149, 104, 222);
-                                        
+                                        for (int iCords = iCell - 1; iCords <= iCell + 1; iCords++)
+                                        {
+                                            for (int jCords = j - 1; jCords <= j + 1; jCords++)
+                                            {
+                                                if (myMap[iCords, jCords] == 1) { flag = false; }
+                                            }
+                                        }
+                                    }
+                                    if (flag)
+                                    {
+                                        for (int iter = 0; iter < deck; iter++)
+                                        {
+                                            int line = iter + i;
+                                            myMap[line, j] = 1;
+                                            (Controls["myButton" + line + j] as Button).BackColor = Color.FromArgb(149, 104, 222);
+
+                                        }
+                                        deck2--;
                                     }
                                 }
                             }
@@ -172,13 +174,27 @@ namespace Sea_War
                             {
                                 if (j + deck <= 11)
                                 {
-                                    deck2--;
-                                    for (int iter = 0; iter < deck; iter++)
+                                    bool flag = true;
+                                    for (int jCell = j; jCell < j + deck; jCell++)
                                     {
-                                        int line = iter + j;
-                                        myMap[i, iter] = 1;
-                                        (Controls["myButton" + i + line] as Button).BackColor = Color.FromArgb(149, 104, 222);
-                                        
+                                        for (int iCords = i - 1; iCords <= i + 1; iCords++)
+                                        {
+                                            for (int jCords = jCell - 1; jCords <= jCell + 1; jCords++)
+                                            {
+                                                if (myMap[iCords, jCords] == 1) { flag = false; }
+                                            }
+                                        }
+                                    }
+                                    if (flag)
+                                    {
+                                        for (int iter = 0; iter < deck; iter++)
+                                        {
+                                            int line = iter + j;
+                                            myMap[i, line] = 1;
+                                            (Controls["myButton" + i + line] as Button).BackColor = Color.FromArgb(149, 104, 222);
+
+                                        }
+                                        deck2--;
                                     }
                                 }
                             }
@@ -195,13 +211,27 @@ namespace Sea_War
                             {
                                 if (i + deck <= 11)
                                 {
-                                    deck3--;
-                                    for (int iter = 0; iter < deck; iter++)
+                                    bool flag = true;
+                                    for (int iCell = i; iCell < i + deck; iCell++)
                                     {
-                                        int line = iter + i;
-                                        myMap[line, j] = 1;
-                                        (Controls["myButton" + line + j] as Button).BackColor = Color.FromArgb(149, 104, 222);
-                                        
+                                        for (int iCords = iCell - 1; iCords <= iCell + 1; iCords++)
+                                        {
+                                            for (int jCords = j - 1; jCords <= j + 1; jCords++)
+                                            {
+                                                if (myMap[iCords, jCords] == 1) { flag = false; }
+                                            }
+                                        }
+                                    }
+                                    if (flag)
+                                    {
+                                        for (int iter = 0; iter < deck; iter++)
+                                        {
+                                            int line = iter + i;
+                                            myMap[line, j] = 1;
+                                            (Controls["myButton" + line + j] as Button).BackColor = Color.FromArgb(149, 104, 222);
+
+                                        }
+                                        deck3--;
                                     }
                                 }
                             }
@@ -211,13 +241,27 @@ namespace Sea_War
                             {
                                 if (j + deck <= 11)
                                 {
-                                    deck3--;
-                                    for (int iter = 0; iter < deck; iter++)
+                                    bool flag = true;
+                                    for (int jCell = j; jCell < j + deck; jCell++)
                                     {
-                                        int line = iter + j;
-                                        myMap[i, iter] = 1;
-                                        (Controls["myButton" + i + line] as Button).BackColor = Color.FromArgb(149, 104, 222);
-                                        
+                                        for (int iCords = i - 1; iCords <= i + 1; iCords++)
+                                        {
+                                            for (int jCords = jCell - 1; jCords <= jCell + 1; jCords++)
+                                            {
+                                                if (myMap[iCords, jCords] == 1) { flag = false; }
+                                            }
+                                        }
+                                    }
+                                    if (flag)
+                                    {
+                                        for (int iter = 0; iter < deck; iter++)
+                                        {
+                                            int line = iter + j;
+                                            myMap[i, line] = 1;
+                                            (Controls["myButton" + i + line] as Button).BackColor = Color.FromArgb(149, 104, 222);
+
+                                        }
+                                        deck3--;
                                     }
                                 }
                             }
@@ -234,13 +278,27 @@ namespace Sea_War
                             {
                                 if (i + deck <= 11)
                                 {
-                                    deck4--;
-                                    for (int iter = 0; iter < deck; iter++)
+                                    bool flag = true;
+                                    for (int iCell = i; iCell < i + deck; iCell++)
                                     {
-                                        int line = iter + i;
-                                        myMap[line, j] = 1;
-                                        (Controls["myButton" + line + j] as Button).BackColor = Color.FromArgb(149, 104, 222);
-                                        
+                                        for (int iCords = iCell - 1; iCords <= iCell + 1; iCords++)
+                                        {
+                                            for (int jCords = j - 1; jCords <= j + 1; jCords++)
+                                            {
+                                                if (myMap[iCords, jCords] == 1) { flag = false; }
+                                            }
+                                        }
+                                    }
+                                    if (flag)
+                                    {
+                                        for (int iter = 0; iter < deck; iter++)
+                                        {
+                                            int line = iter + i;
+                                            myMap[line, j] = 1;
+                                            (Controls["myButton" + line + j] as Button).BackColor = Color.FromArgb(149, 104, 222);
+
+                                        }
+                                        deck4--;
                                     }
                                 }
                             }
@@ -250,13 +308,27 @@ namespace Sea_War
                             {
                                 if (j + deck <= 11)
                                 {
-                                    deck4--;
-                                    for (int iter = 0; iter < deck; iter++)
+                                    bool flag = true;
+                                    for (int jCell = j; jCell < j + deck; jCell++)
                                     {
-                                        int line = iter + j;
-                                        myMap[i, iter] = 1;
-                                        (Controls["myButton" + i + line] as Button).BackColor = Color.FromArgb(149, 104, 222);
-                                        
+                                        for (int iCords = i - 1; iCords <= i + 1; iCords++)
+                                        {
+                                            for (int jCords = jCell - 1; jCords <= jCell + 1; jCords++)
+                                            {
+                                                if (myMap[iCords, jCords] == 1) { flag = false; }
+                                            }
+                                        }
+                                    }
+                                    if (flag)
+                                    {
+                                        for (int iter = 0; iter < deck; iter++)
+                                        {
+                                            int line = iter + j;
+                                            myMap[i, line] = 1;
+                                            (Controls["myButton" + i + line] as Button).BackColor = Color.FromArgb(149, 104, 222);
+
+                                        }
+                                        deck4--;
                                     }
                                 }
                             }
