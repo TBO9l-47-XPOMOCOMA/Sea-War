@@ -244,7 +244,7 @@ namespace Sea_War
                     }
 
                 }
-                
+            
         }
             private void ExitLabel_ExitGame(object sender, EventArgs e)
         {
