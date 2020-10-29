@@ -32,7 +32,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.Exit = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.playLabel = new System.Windows.Forms.Label();
             this.singleDeck = new System.Windows.Forms.RadioButton();
             this.doubleDeck = new System.Windows.Forms.RadioButton();
             this.threeDeck = new System.Windows.Forms.RadioButton();
@@ -82,15 +82,19 @@
             this.label3.TabIndex = 2;
             this.label3.Text = "Exit";
             // 
-            // label2
+            // playLabel
             // 
-            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.label2.BackColor = System.Drawing.Color.Transparent;
-            this.label2.Image = ((System.Drawing.Image)(resources.GetObject("label2.Image")));
-            this.label2.Location = new System.Drawing.Point(930, 456);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(78, 78);
-            this.label2.TabIndex = 3;
+            this.playLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.playLabel.BackColor = System.Drawing.Color.Transparent;
+            this.playLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.playLabel.Image = ((System.Drawing.Image)(resources.GetObject("playLabel.Image")));
+            this.playLabel.Location = new System.Drawing.Point(941, 437);
+            this.playLabel.Name = "playLabel";
+            this.playLabel.Size = new System.Drawing.Size(78, 78);
+            this.playLabel.TabIndex = 3;
+            this.playLabel.Text = "Play";
+            this.playLabel.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.playLabel.Click += new System.EventHandler(this.playLabel_Click);
             // 
             // singleDeck
             // 
@@ -198,7 +202,7 @@
             this.ClientSize = new System.Drawing.Size(1020, 543);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.playLabel);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.Exit);
             this.Controls.Add(this.label1);
@@ -221,7 +225,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label Exit;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label playLabel;
         private System.Windows.Forms.RadioButton singleDeck;
         private System.Windows.Forms.RadioButton doubleDeck;
         private System.Windows.Forms.RadioButton threeDeck;

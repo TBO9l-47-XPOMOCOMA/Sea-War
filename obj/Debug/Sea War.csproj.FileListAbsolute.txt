@@ -8,3 +8,13 @@ C:\Users\Admin\Desktop\Важное\Боль\2 курс\ТиМП\Семестр�
 C:\Users\Admin\Desktop\Важное\Боль\2 курс\ТиМП\Семестровые\Sea War\obj\Debug\Sea War.csproj.CoreCompileInputs.cache
 C:\Users\Admin\Desktop\Важное\Боль\2 курс\ТиМП\Семестровые\Sea War\obj\Debug\Sea War.exe
 C:\Users\Admin\Desktop\Важное\Боль\2 курс\ТиМП\Семестровые\Sea War\obj\Debug\Sea War.pdb
+C:\Users\Admin\Source\Repos\TBO9l-47-XPOMOCOMA\Sea-War\bin\Debug\Sea War.exe.config
+C:\Users\Admin\Source\Repos\TBO9l-47-XPOMOCOMA\Sea-War\bin\Debug\Sea War.exe
+C:\Users\Admin\Source\Repos\TBO9l-47-XPOMOCOMA\Sea-War\bin\Debug\Sea War.pdb
+C:\Users\Admin\Source\Repos\TBO9l-47-XPOMOCOMA\Sea-War\obj\Debug\Sea War.csprojAssemblyReference.cache
+C:\Users\Admin\Source\Repos\TBO9l-47-XPOMOCOMA\Sea-War\obj\Debug\Sea_War.Form1.resources
+C:\Users\Admin\Source\Repos\TBO9l-47-XPOMOCOMA\Sea-War\obj\Debug\Sea_War.Properties.Resources.resources
+C:\Users\Admin\Source\Repos\TBO9l-47-XPOMOCOMA\Sea-War\obj\Debug\Sea War.csproj.GenerateResource.cache
+C:\Users\Admin\Source\Repos\TBO9l-47-XPOMOCOMA\Sea-War\obj\Debug\Sea War.csproj.CoreCompileInputs.cache
+C:\Users\Admin\Source\Repos\TBO9l-47-XPOMOCOMA\Sea-War\obj\Debug\Sea War.exe
+C:\Users\Admin\Source\Repos\TBO9l-47-XPOMOCOMA\Sea-War\obj\Debug\Sea War.pdb
