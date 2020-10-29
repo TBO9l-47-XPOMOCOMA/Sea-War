@@ -103,245 +103,85 @@ namespace Sea_War
             }
         }
 
+        public int SetShip(int i, int j, int deck, int selectedDeck, string location)
+        {
+            if (selectedDeck > 0)
+            {
+                if (location == "vertical")
+                {
+                    if (i + deck <= 11)
+                    {
+                        bool flag = true;
+                        for (int iCell = i; iCell < i + deck; iCell++)
+                        {
+                            for (int iCords = iCell - 1; iCords <= iCell + 1; iCords++)
+                            {
+                                for (int jCords = j - 1; jCords <= j + 1; jCords++)
+                                {
+                                    if (myMap[iCords, jCords] == 1) { flag = false; }
+                                }
+                            }
+                        }
+                        if (flag)
+                        {
+                            for (int iter = 0; iter < deck; iter++)
+                            {
+                                int line = iter + i;
+                                myMap[line, j] = 1;
+                                (Controls["myButton" + line + j] as Button).BackColor = Color.FromArgb(149, 104, 222);
+
+                            }
+                            --selectedDeck;
+                        }
+                    }
+                }
+
+
+                else if (location == "horizontal")
+                {
+                    if (j + deck <= 11)
+                    {
+                        bool flag = true;
+                        for (int jCell = j; jCell < j + deck; jCell++)
+                        {
+                            for (int iCords = i - 1; iCords <= i + 1; iCords++)
+                            {
+                                for (int jCords = jCell - 1; jCords <= jCell + 1; jCords++)
+                                {
+                                    if (myMap[iCords, jCords] == 1) { flag = false; }
+                                }
+                            }
+                        }
+                        if (flag)
+                        {
+                            for (int iter = 0; iter < deck; iter++)
+                            {
+                                int line = iter + j;
+                                myMap[i, line] = 1;
+                                (Controls["myButton" + i + line] as Button).BackColor = Color.FromArgb(149, 104, 222);
+
+                            }
+                             --selectedDeck;
+                        }
+                    }
+                }
+            }
+            return selectedDeck;
+        }
+
         public void MyMapClick(object sender, EventArgs e)
         {
             Button pressedBut = sender as Button;
             List<int> xy = pressedBut.Tag as List<int>;
             int i = xy[0];
             int j = xy[1];
-            int deck = 0;
             string location = "";
-            if (singleDeck.Checked) { deck = 1; }
-            else if (doubleDeck.Checked) { deck = 2; }
-            else if (threeDeck.Checked) { deck = 3; }
-            else if (fourDeck.Checked) { deck = 4; }
             if (vertical.Checked) { location = "vertical"; }
             else if (horizontal.Checked) { location = "horizontal"; }
-            switch (deck)
-            {
-                case 1:
-                    {
-                        if (deck1 > 0)
-                        {
-                            bool flag = true;
-                            for(int iCords = i-1;iCords<=i+1;iCords++)
-                            {
-                                for (int jCords = j-1; jCords <= j+1; jCords++)
-                                {
-                                    if (myMap[iCords, jCords] == 1) { flag = false; }
-                                }
-                            }
-                            if (flag == true)
-                            {
-                                myMap[i, j] = 1;
-                                (Controls["myButton" + i + j] as Button).BackColor = Color.FromArgb(149, 104, 222);
-                                deck1--;
-                            }                          
-                        }
-                        break;
-                    }
-
-                case 2:
-                    {
-                        if (deck2 > 0)
-                        {
-                            if (location == "vertical")
-                            {
-                                if (i + deck <= 11)
-                                {
-                                    bool flag = true;
-                                    for (int iCell = i; iCell < i + deck; iCell++)
-                                    {
-                                        for (int iCords = iCell - 1; iCords <= iCell + 1; iCords++)
-                                        {
-                                            for (int jCords = j - 1; jCords <= j + 1; jCords++)
-                                            {
-                                                if (myMap[iCords, jCords] == 1) { flag = false; }
-                                            }
-                                        }
-                                    }
-                                    if (flag)
-                                    {
-                                        for (int iter = 0; iter < deck; iter++)
-                                        {
-                                            int line = iter + i;
-                                            myMap[line, j] = 1;
-                                            (Controls["myButton" + line + j] as Button).BackColor = Color.FromArgb(149, 104, 222);
-
-                                        }
-                                        deck2--;
-                                    }
-                                }
-                            }
-
-
-                            else if (location == "horizontal")
-                            {
-                                if (j + deck <= 11)
-                                {
-                                    bool flag = true;
-                                    for (int jCell = j; jCell < j + deck; jCell++)
-                                    {
-                                        for (int iCords = i - 1; iCords <= i + 1; iCords++)
-                                        {
-                                            for (int jCords = jCell - 1; jCords <= jCell + 1; jCords++)
-                                            {
-                                                if (myMap[iCords, jCords] == 1) { flag = false; }
-                                            }
-                                        }
-                                    }
-                                    if (flag)
-                                    {
-                                        for (int iter = 0; iter < deck; iter++)
-                                        {
-                                            int line = iter + j;
-                                            myMap[i, line] = 1;
-                                            (Controls["myButton" + i + line] as Button).BackColor = Color.FromArgb(149, 104, 222);
-
-                                        }
-                                        deck2--;
-                                    }
-                                }
-                            }
-                            
-                        }
-                        break;
-                    }
-
-                case 3:
-                    {
-                        if (deck3 > 0)
-                        {
-                            if (location == "vertical")
-                            {
-                                if (i + deck <= 11)
-                                {
-                                    bool flag = true;
-                                    for (int iCell = i; iCell < i + deck; iCell++)
-                                    {
-                                        for (int iCords = iCell - 1; iCords <= iCell + 1; iCords++)
-                                        {
-                                            for (int jCords = j - 1; jCords <= j + 1; jCords++)
-                                            {
-                                                if (myMap[iCords, jCords] == 1) { flag = false; }
-                                            }
-                                        }
-                                    }
-                                    if (flag)
-                                    {
-                                        for (int iter = 0; iter < deck; iter++)
-                                        {
-                                            int line = iter + i;
-                                            myMap[line, j] = 1;
-                                            (Controls["myButton" + line + j] as Button).BackColor = Color.FromArgb(149, 104, 222);
-
-                                        }
-                                        deck3--;
-                                    }
-                                }
-                            }
-
-
-                            else if (location == "horizontal")
-                            {
-                                if (j + deck <= 11)
-                                {
-                                    bool flag = true;
-                                    for (int jCell = j; jCell < j + deck; jCell++)
-                                    {
-                                        for (int iCords = i - 1; iCords <= i + 1; iCords++)
-                                        {
-                                            for (int jCords = jCell - 1; jCords <= jCell + 1; jCords++)
-                                            {
-                                                if (myMap[iCords, jCords] == 1) { flag = false; }
-                                            }
-                                        }
-                                    }
-                                    if (flag)
-                                    {
-                                        for (int iter = 0; iter < deck; iter++)
-                                        {
-                                            int line = iter + j;
-                                            myMap[i, line] = 1;
-                                            (Controls["myButton" + i + line] as Button).BackColor = Color.FromArgb(149, 104, 222);
-
-                                        }
-                                        deck3--;
-                                    }
-                                }
-                            }
-                            
-                        }
-                        break;
-                    }
-
-                case 4:
-                    {
-                        if (deck4 > 0)
-                        {
-                            if (location == "vertical")
-                            {
-                                if (i + deck <= 11)
-                                {
-                                    bool flag = true;
-                                    for (int iCell = i; iCell < i + deck; iCell++)
-                                    {
-                                        for (int iCords = iCell - 1; iCords <= iCell + 1; iCords++)
-                                        {
-                                            for (int jCords = j - 1; jCords <= j + 1; jCords++)
-                                            {
-                                                if (myMap[iCords, jCords] == 1) { flag = false; }
-                                            }
-                                        }
-                                    }
-                                    if (flag)
-                                    {
-                                        for (int iter = 0; iter < deck; iter++)
-                                        {
-                                            int line = iter + i;
-                                            myMap[line, j] = 1;
-                                            (Controls["myButton" + line + j] as Button).BackColor = Color.FromArgb(149, 104, 222);
-
-                                        }
-                                        deck4--;
-                                    }
-                                }
-                            }
-
-
-                            else if (location == "horizontal")
-                            {
-                                if (j + deck <= 11)
-                                {
-                                    bool flag = true;
-                                    for (int jCell = j; jCell < j + deck; jCell++)
-                                    {
-                                        for (int iCords = i - 1; iCords <= i + 1; iCords++)
-                                        {
-                                            for (int jCords = jCell - 1; jCords <= jCell + 1; jCords++)
-                                            {
-                                                if (myMap[iCords, jCords] == 1) { flag = false; }
-                                            }
-                                        }
-                                    }
-                                    if (flag)
-                                    {
-                                        for (int iter = 0; iter < deck; iter++)
-                                        {
-                                            int line = iter + j;
-                                            myMap[i, line] = 1;
-                                            (Controls["myButton" + i + line] as Button).BackColor = Color.FromArgb(149, 104, 222);
-
-                                        }
-                                        deck4--;
-                                    }
-                                }
-                            }
-                            
-                        }
-                        break;
-                    }
-            }
+            if (singleDeck.Checked) { deck1 = SetShip(i, j, 1, deck1, location);  }
+            else if (doubleDeck.Checked) { deck2 = SetShip(i, j, 2, deck2, location); }
+            else if (threeDeck.Checked) { deck3 = SetShip(i, j, 3, deck3, location); }
+            else if (fourDeck.Checked) { deck4 = SetShip(i, j, 4, deck4, location); }
         }
 
         public void EnemyMapClick(object sender, EventArgs e)
@@ -367,8 +207,7 @@ namespace Sea_War
         Random random = new Random();
         static int RandCoords(Random random)
         {
-            return random.Next(1, 11);
-            
+            return random.Next(1, 11); 
         }
 
         public void enemyGeneration()
@@ -405,94 +244,7 @@ namespace Sea_War
                     }
 
                 }
-            while (true)
-            {
-                int count = 9;
-                for (int row = 1; row < 11; row++)
-                    for (int col = 1; col < 11; col++)
-                    {
-                        if (enemyMap[row, col] == 2)
-                        {
-                            enemyMap[row, col] = 0;
-                            (Controls["eButton" + row + col] as Button).BackColor = Color.FromArgb(213, 223, 242);
-                        }
-                    }
-                for (int deck = 3; deck > 0; deck--)
-                {
-                    for (int quantity = 1; quantity <= 5 - deck; quantity++)
-                    {
-                        int i = RandCoords(random);
-                        int j = RandCoords(random);
-                        int loc = random.Next(0, 2); // 0 - vertical; 1 - horizontal
-                        if (loc == 0)
-                        {
-                            if (i + deck < 11)
-                            {
-                                bool flag = true;
-                                for (int iCell = i; iCell < i + deck; iCell++)
-                                {
-                                    for (int iCords = iCell - 1; iCords <= iCell + 1; iCords++)
-                                    {
-                                        for (int jCords = j - 1; jCords <= j + 1; jCords++)
-                                        {
-                                            if (enemyMap[iCords, jCords] == 1 || enemyMap[iCords, jCords] == 2) 
-                                            {
-                                                flag = false; 
-                                                quantity--;
-                                                continue;
-                                            }
-                                        }
-                                    }
-                                }
-                                if (flag)
-                                {
-                                    count--;
-                                    for (int iter = 0; iter < deck; iter++)
-                                    {
-                                        int line = iter + i;
-                                        enemyMap[line, j] = 2;
-                                        (Controls["eButton" + line + j] as Button).BackColor = Color.FromArgb(149, 104, 222);
-                                    }
-                                }
-                            }
-                        }
-                        else if (loc == 1)
-                        {
-                            if (j + deck < 11)
-                            {
-                                bool flag = true;
-                                for (int jCell = j; jCell < j + deck; jCell++)
-                                {
-                                    for (int iCords = i - 1; iCords <= i + 1; iCords++)
-                                    {
-                                        for (int jCords = jCell - 1; jCords <= jCell + 1; jCords++)
-                                        {
-                                            if (enemyMap[iCords, jCords] == 1 || enemyMap[iCords, jCords] == 2)
-                                            { flag = false;
-                                                quantity--;
-                                                continue;
-                                            }
-                                        }
-                                    }
-                                }
-                                if (flag)
-                                {
-                                    count--;
-                                    for (int iter = 0; iter < deck; iter++)
-                                    {
-                                        int line = iter + j;
-                                        enemyMap[i, line] = 2;
-                                        (Controls["eButton" + i + line] as Button).BackColor = Color.FromArgb(149, 104, 222);
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-                if (count == 0) { break; }
-            }
                 
-            
         }
             private void ExitLabel_ExitGame(object sender, EventArgs e)
         {
