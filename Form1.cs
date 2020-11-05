@@ -195,13 +195,21 @@ namespace Sea_War
 
         private void playLabel_Click(object sender, EventArgs e)
         {
-            for(int iCords = 1; iCords<11;iCords++)
-                for(int jCords=1;jCords<11;jCords++)
-                {
-                    (Controls["eButton" + iCords + jCords] as Button).Enabled = true;
-                    (Controls["myButton" + iCords + jCords] as Button).Enabled = false;
-                }
-            enemyGeneration();
+            if (deck1 == 0 && deck2 == 0 && deck3 == 0 && deck4 == 0)
+            {
+                for (int iCords = 1; iCords < 11; iCords++)
+                    for (int jCords = 1; jCords < 11; jCords++)
+                    {
+                        (Controls["eButton" + iCords + jCords] as Button).Enabled = true;
+                        (Controls["myButton" + iCords + jCords] as Button).Enabled = false;
+                    }
+                enemyGeneration();
+            }
+            else
+            {
+                Form2 form2 = new Form2();
+                form2.Show();
+            }
         }
 
         Random random = new Random();
@@ -249,6 +257,17 @@ namespace Sea_War
             private void ExitLabel_ExitGame(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void clearButton_Click(object sender, EventArgs e)
+        {
+            for(int i = 1; i<12;i++)
+                for(int j = 1; j<12; j++)
+                {
+                    (Controls["myButton" + i + j] as Button).BackColor = Color.FromArgb(213, 223, 242);
+                    myMap[i, j] = 0;
+                }
+            deck1 = 4; deck2 = 3; deck3 = 2; deck4 = 1;
         }
     }
 }
