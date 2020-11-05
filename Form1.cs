@@ -29,7 +29,8 @@ namespace Sea_War
         int deck2;
         int deck3;
         int deck4;
-
+        int myKill;
+        int enemyKill;
         public void Init()
         {
             CreateMap();
@@ -41,6 +42,8 @@ namespace Sea_War
              deck2 = 3;
              deck3 = 2; 
              deck4 = 1;
+            myKill = 0;
+            enemyKill = 0;
             for (int i = 0; i < mapSize; i++)
             {
                 for (int j = 0; j < mapSize; j++)
@@ -198,8 +201,16 @@ namespace Sea_War
             int j = RandCoords(random);
             if (myMap[i, j] == 1)
             {
-                myMap[i, j] = 2;
+                myMap[i, j] = 3;
+                enemyKill++;
                 (Controls["myButton" + i + j] as Button).BackColor = Color.Red;
+                if(enemyKill==20)
+                {
+                    EnemyWin alert = new EnemyWin();
+                    alert.Show();
+                    CreateMap();
+                }
+                EnemyShoot();
             }
             else if (myMap[i, j] == 0)
             {
@@ -220,8 +231,15 @@ namespace Sea_War
             int j = xy[1];
             if(enemyMap[i,j]==1)
             {
-                enemyMap[i, j] = 2;
+                enemyMap[i, j] = 3;
+                myKill++;
                 (Controls["eButton" + i + j] as Button).BackColor = Color.Red;
+                if(myKill==4)
+                {
+                    PlayerWin alert = new PlayerWin();
+                    alert.Show();
+                    CreateMap();
+                }
             }
             else if(enemyMap[i,j]==0)
             {
