@@ -42,6 +42,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.clearButton = new System.Windows.Forms.Button();
+            this.random_Button = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -114,7 +115,7 @@
             this.doubleDeck.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.doubleDeck.BackColor = System.Drawing.Color.Thistle;
             this.doubleDeck.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.doubleDeck.Location = new System.Drawing.Point(3, 27);
+            this.doubleDeck.Location = new System.Drawing.Point(3, 32);
             this.doubleDeck.Name = "doubleDeck";
             this.doubleDeck.Size = new System.Drawing.Size(120, 17);
             this.doubleDeck.TabIndex = 5;
@@ -126,7 +127,7 @@
             this.threeDeck.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.threeDeck.BackColor = System.Drawing.Color.Thistle;
             this.threeDeck.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.threeDeck.Location = new System.Drawing.Point(3, 51);
+            this.threeDeck.Location = new System.Drawing.Point(3, 61);
             this.threeDeck.Name = "threeDeck";
             this.threeDeck.Size = new System.Drawing.Size(120, 17);
             this.threeDeck.TabIndex = 6;
@@ -138,7 +139,7 @@
             this.fourDeck.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.fourDeck.BackColor = System.Drawing.Color.Thistle;
             this.fourDeck.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.fourDeck.Location = new System.Drawing.Point(3, 75);
+            this.fourDeck.Location = new System.Drawing.Point(3, 88);
             this.fourDeck.Name = "fourDeck";
             this.fourDeck.Size = new System.Drawing.Size(120, 17);
             this.fourDeck.TabIndex = 7;
@@ -198,13 +199,26 @@
             this.clearButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.clearButton.BackColor = System.Drawing.Color.Thistle;
             this.clearButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.clearButton.Location = new System.Drawing.Point(156, 461);
+            this.clearButton.Location = new System.Drawing.Point(156, 456);
             this.clearButton.Name = "clearButton";
             this.clearButton.Size = new System.Drawing.Size(120, 32);
             this.clearButton.TabIndex = 10;
             this.clearButton.Text = "Clear";
             this.clearButton.UseVisualStyleBackColor = false;
             this.clearButton.Click += new System.EventHandler(this.clearButton_Click);
+            // 
+            // random_Button
+            // 
+            this.random_Button.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.random_Button.BackColor = System.Drawing.Color.Thistle;
+            this.random_Button.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.random_Button.Location = new System.Drawing.Point(156, 489);
+            this.random_Button.Name = "random_Button";
+            this.random_Button.Size = new System.Drawing.Size(119, 32);
+            this.random_Button.TabIndex = 12;
+            this.random_Button.Text = "Random";
+            this.random_Button.UseVisualStyleBackColor = false;
+            this.random_Button.Click += new System.EventHandler(this.random_Button_Click);
             // 
             // Form1
             // 
@@ -214,6 +228,7 @@
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1020, 543);
+            this.Controls.Add(this.random_Button);
             this.Controls.Add(this.clearButton);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
@@ -250,6 +265,7 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button clearButton;
+        private System.Windows.Forms.Button random_Button;
     }
 }
 

@@ -139,11 +139,7 @@ namespace Sea_War
                             {
                                 int line = iter + i;
                                 map[line, j] = 1;
-                                if (forControls == "myButton")
-                                {
                                     (Controls[forControls + line + j] as Button).BackColor = Color.FromArgb(149, 104, 222);
-                                }
-
                             }
                             --selectedDeck;
                         }
@@ -171,11 +167,8 @@ namespace Sea_War
                             for (int iter = 0; iter < deck; iter++)
                             {
                                 int line = iter + j;
-                                map[i, line] = 1;
-                                if (forControls == "myButton")
-                                {
+                                map[i, line] = 1;                             
                                     (Controls[forControls + i + line] as Button).BackColor = Color.FromArgb(149, 104, 222);
-                                }
                             }
                             --selectedDeck;
                         }
@@ -279,19 +272,19 @@ namespace Sea_War
                     (Controls["eButton" + iCords + jCords] as Button).BackColor = Color.FromArgb(213, 223, 242);
                     (Controls["myButton" + iCords + jCords] as Button).Enabled = false;
                 }
-            enemyGeneration();
+            fieldGeneration(eDecks,enemyMap,"eButton");
         }
         static int RandCoords(Random random)
         {
             return random.Next(1, 11); 
         }
 
-        public void enemyGeneration()
+        public void fieldGeneration(int [] arrayOfDecks, int [,] map, string buttonForControls)
         {
             int index = 3;
-            while(eDecks[0]>0 || eDecks[1]>0 || eDecks[2]>0 || eDecks[3] > 0)
+            while(arrayOfDecks[0]>0 || arrayOfDecks[1]>0 || arrayOfDecks[2]>0 || arrayOfDecks[3] > 0)
             {
-                if (eDecks[index] == 0)
+                if (arrayOfDecks[index] == 0)
                     index--;
                 int i = RandCoords(random);
                 int j = RandCoords(random);
@@ -299,7 +292,7 @@ namespace Sea_War
                 string location;
                 if (rand == 0) { location = "vertical"; }
                 else location = "horizontal";
-                eDecks[index] = SetShip(i, j, index + 1,eDecks[index],location,enemyMap,"eButton");
+                arrayOfDecks[index] = SetShip(i, j, index + 1, arrayOfDecks[index],location, map,buttonForControls);
             }
             
         }
@@ -321,6 +314,11 @@ namespace Sea_War
             {
                 myDecks[i] = 4 - i;
             }
+        }
+
+        private void random_Button_Click(object sender, EventArgs e)
+        {
+            fieldGeneration(myDecks, myMap,"myButton");
         }
     }
 }
