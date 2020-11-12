@@ -41,6 +41,7 @@
             this.horizontal = new System.Windows.Forms.RadioButton();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.clearButton = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -149,7 +150,7 @@
             this.vertical.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.vertical.BackColor = System.Drawing.Color.Thistle;
             this.vertical.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.vertical.Location = new System.Drawing.Point(3, 3);
+            this.vertical.Location = new System.Drawing.Point(0, 0);
             this.vertical.Name = "vertical";
             this.vertical.Size = new System.Drawing.Size(120, 17);
             this.vertical.TabIndex = 8;
@@ -161,9 +162,9 @@
             this.horizontal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.horizontal.BackColor = System.Drawing.Color.Thistle;
             this.horizontal.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.horizontal.Location = new System.Drawing.Point(3, 27);
+            this.horizontal.Location = new System.Drawing.Point(0, 23);
             this.horizontal.Name = "horizontal";
-            this.horizontal.Size = new System.Drawing.Size(120, 17);
+            this.horizontal.Size = new System.Drawing.Size(120, 20);
             this.horizontal.TabIndex = 9;
             this.horizontal.Text = "Horizontal";
             this.horizontal.UseVisualStyleBackColor = false;
@@ -185,12 +186,25 @@
             // 
             this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.panel2.BackColor = System.Drawing.Color.Transparent;
-            this.panel2.Controls.Add(this.vertical);
             this.panel2.Controls.Add(this.horizontal);
+            this.panel2.Controls.Add(this.vertical);
             this.panel2.Location = new System.Drawing.Point(156, 410);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(137, 109);
+            this.panel2.Size = new System.Drawing.Size(137, 49);
             this.panel2.TabIndex = 11;
+            // 
+            // clearButton
+            // 
+            this.clearButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.clearButton.BackColor = System.Drawing.Color.Thistle;
+            this.clearButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.clearButton.Location = new System.Drawing.Point(156, 461);
+            this.clearButton.Name = "clearButton";
+            this.clearButton.Size = new System.Drawing.Size(120, 32);
+            this.clearButton.TabIndex = 10;
+            this.clearButton.Text = "Clear";
+            this.clearButton.UseVisualStyleBackColor = false;
+            this.clearButton.Click += new System.EventHandler(this.clearButton_Click);
             // 
             // Form1
             // 
@@ -200,6 +214,7 @@
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1020, 543);
+            this.Controls.Add(this.clearButton);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.playLabel);
@@ -234,6 +249,7 @@
         private System.Windows.Forms.RadioButton horizontal;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Button clearButton;
     }
 }
 

@@ -18,3 +18,6 @@ C:\Users\Admin\Source\Repos\TBO9l-47-XPOMOCOMA\Sea-War\obj\Debug\Sea War.csproj.
 C:\Users\Admin\Source\Repos\TBO9l-47-XPOMOCOMA\Sea-War\obj\Debug\Sea War.csproj.CoreCompileInputs.cache
 C:\Users\Admin\Source\Repos\TBO9l-47-XPOMOCOMA\Sea-War\obj\Debug\Sea War.exe
 C:\Users\Admin\Source\Repos\TBO9l-47-XPOMOCOMA\Sea-War\obj\Debug\Sea War.pdb
+C:\Users\Admin\Source\Repos\TBO9l-47-XPOMOCOMA\Sea-War\obj\Debug\Sea_War.Form2.resources
+C:\Users\Admin\Source\Repos\TBO9l-47-XPOMOCOMA\Sea-War\obj\Debug\Sea_War.EnemyWin.resources
+C:\Users\Admin\Source\Repos\TBO9l-47-XPOMOCOMA\Sea-War\obj\Debug\Sea_War.PlayerWin.resources
