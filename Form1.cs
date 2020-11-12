@@ -208,7 +208,7 @@ namespace Sea_War
                 {
                     EnemyWin alert = new EnemyWin();
                     alert.Show();
-                    CreateMap();
+                    
                 }
                 EnemyShoot();
             }
