@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Timers;
 
 namespace Sea_War
 {
@@ -24,15 +25,25 @@ namespace Sea_War
         int[,] enemyMap = new int[mapSize, mapSize];
         GroupBox MyGroupBox = new GroupBox();
         GroupBox EnemyGroupBox = new GroupBox();
-        int deck1 = 4; int deck2 = 3; int deck3 = 2; int deck4 = 1;
-
+        int deck1;
+        int deck2;
+        int deck3;
+        int deck4;
+        int myKill;
+        int enemyKill;
         public void Init()
         {
             CreateMap();
         }
-        
+
         public void CreateMap()
         {
+             deck1 = 4;
+             deck2 = 3;
+             deck3 = 2; 
+             deck4 = 1;
+            myKill = 0;
+            enemyKill = 0;
             for (int i = 0; i < mapSize; i++)
             {
                 for (int j = 0; j < mapSize; j++)
@@ -44,21 +55,21 @@ namespace Sea_War
                     button.BackColor = Color.FromArgb(213, 223, 242);
                     button.Tag = new List<int> { i, j };
                     button.Name = "myButton" + i + j;
-                    if(i==11||j==11)
+                    if (i == 11 || j == 11)
                     {
                         button.Visible = false;
                     }
                     MyGroupBox.Controls.Add(button);
-                    button.Click += new EventHandler(MyMapClick); 
-                    if (i == 0||j==0)
+                    button.Click += new EventHandler(MyMapClick);
+                    if (i == 0 || j == 0)
                     {
                         button.BackColor = Color.White;
-                        if (i == 0&&j>0&&j<11)
+                        if (i == 0 && j > 0 && j < 11)
                         {
-                            button.Text = alphabet[j-1].ToString();
+                            button.Text = alphabet[j - 1].ToString();
                             button.Enabled = false;
                         }
-                        if(j==0&&i>0&&i<11)
+                        if (j == 0 && i > 0 && i < 11)
                         {
                             button.Text = i.ToString();
                             button.Enabled = false;
@@ -74,7 +85,7 @@ namespace Sea_War
                 {
                     enemyMap[i, j] = 0;
                     Button button = new Button();
-                    button.Location = new Point(778+j * cellSize,50+i * cellSize);
+                    button.Location = new Point(778 + j * cellSize, 50 + i * cellSize);
                     button.Size = new Size(cellSize, cellSize);
                     button.BackColor = Color.FromArgb(213, 223, 242);
                     button.Tag = new List<int> { i, j };
@@ -89,11 +100,11 @@ namespace Sea_War
                     if (i == 0 || j == 0)
                     {
                         button.BackColor = Color.White;
-                        if (i == 0 && j>0&&j<11)
+                        if (i == 0 && j > 0 && j < 11)
                         {
-                            button.Text = alphabet[j-1].ToString();
+                            button.Text = alphabet[j - 1].ToString();
                         }
-                        if (j == 0 && i > 0&&i<11)
+                        if (j == 0 && i > 0 && i < 11)
                         {
                             button.Text = i.ToString();
                         }
@@ -161,7 +172,7 @@ namespace Sea_War
                                 (Controls["myButton" + i + line] as Button).BackColor = Color.FromArgb(149, 104, 222);
 
                             }
-                             --selectedDeck;
+                            --selectedDeck;
                         }
                     }
                 }
@@ -178,30 +189,84 @@ namespace Sea_War
             string location = "";
             if (vertical.Checked) { location = "vertical"; }
             else if (horizontal.Checked) { location = "horizontal"; }
-            if (singleDeck.Checked) { deck1 = SetShip(i, j, 1, deck1, location);  }
+            if (singleDeck.Checked) { deck1 = SetShip(i, j, 1, deck1, location); }
             else if (doubleDeck.Checked) { deck2 = SetShip(i, j, 2, deck2, location); }
             else if (threeDeck.Checked) { deck3 = SetShip(i, j, 3, deck3, location); }
             else if (fourDeck.Checked) { deck4 = SetShip(i, j, 4, deck4, location); }
         }
+        
+        public void EnemyShoot()
+        {
+            int i = RandCoords(random);
+            int j = RandCoords(random);
+            if (myMap[i, j] == 1)
+            {
+                myMap[i, j] = 3;
+                enemyKill++;
+                (Controls["myButton" + i + j] as Button).BackColor = Color.Red;
+                if(enemyKill==20)
+                {
+                    EnemyWin alert = new EnemyWin();
+                    alert.Show();
+                    
+                }
+                EnemyShoot();
+            }
+            else if (myMap[i, j] == 0)
+            {
+                myMap[i, j] = 2;
+                (Controls["myButton" + i + j] as Button).BackColor = Color.Gray;
 
+            }
+            else if (myMap[i, j] == 2)
+            {
+                EnemyShoot();
+            }
+        }
         public void EnemyMapClick(object sender, EventArgs e)
         {
             Button pressedBut = sender as Button;
             List<int> xy = pressedBut.Tag as List<int>;
             int i = xy[0];
             int j = xy[1];
+            if(enemyMap[i,j]==1)
+            {
+                enemyMap[i, j] = 3;
+                myKill++;
+                (Controls["eButton" + i + j] as Button).BackColor = Color.Red;
+                if(myKill==4)
+                {
+                    PlayerWin alert = new PlayerWin();
+                    alert.Show();
+                    CreateMap();
+                }
+            }
+            else if(enemyMap[i,j]==0)
+            {
+                enemyMap[i, j] = 2;
+                (Controls["eButton" + i + j] as Button).BackColor = Color.Gray;
+                EnemyShoot();
+            }
         }
 
 
         private void playLabel_Click(object sender, EventArgs e)
         {
-            for(int iCords = 1; iCords<11;iCords++)
-                for(int jCords=1;jCords<11;jCords++)
-                {
-                    (Controls["eButton" + iCords + jCords] as Button).Enabled = true;
-                    (Controls["myButton" + iCords + jCords] as Button).Enabled = false;
-                }
-            enemyGeneration();
+            if (deck1 == 0 && deck2 == 0 && deck3 == 0 && deck4 == 0)
+            {
+                for (int iCords = 1; iCords < 11; iCords++)
+                    for (int jCords = 1; jCords < 11; jCords++)
+                    {
+                        (Controls["eButton" + iCords + jCords] as Button).Enabled = true;
+                        (Controls["myButton" + iCords + jCords] as Button).Enabled = false;
+                    }
+                enemyGeneration();
+            }
+            else
+            {
+                Form2 form2 = new Form2();
+                form2.Show();
+            }
         }
 
         Random random = new Random();
@@ -249,6 +314,17 @@ namespace Sea_War
             private void ExitLabel_ExitGame(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void clearButton_Click(object sender, EventArgs e)
+        {
+            for(int i = 1; i<12;i++)
+                for(int j = 1; j<12; j++)
+                {
+                    (Controls["myButton" + i + j] as Button).BackColor = Color.FromArgb(213, 223, 242);
+                    myMap[i, j] = 0;
+                }
+            deck1 = 4; deck2 = 3; deck3 = 2; deck4 = 1;
         }
     }
 }
