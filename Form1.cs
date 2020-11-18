@@ -114,6 +114,41 @@ namespace Sea_War
             }
         }
 
+        public void ClearField()
+        {
+            clearButton.Enabled = true;
+            random_Button.Enabled = true;
+            playLabel.Enabled = true;
+            for (int i = 0; i < 4; i++)
+            {
+                myDecks[i] = 4 - i;
+                eDecks[i] = 4 - i;
+            }
+            myKill = 0;
+            enemyKill = 0;
+            for (int i = 1; i < mapSize; i++)
+            {
+                for (int j = 1; j < mapSize; j++)
+                {
+                    myMap[i, j] = 0;
+                    (Controls["myButton" + i + j] as Button).Enabled = true;
+                    (Controls["myButton" + i + j] as Button).BackColor = Color.FromArgb(213, 223, 242);
+                }
+            }
+
+            for (int i = 1; i < mapSize; i++)
+            {
+                for (int j = 1; j < mapSize; j++)
+                {
+                    enemyMap[i, j] = 0;
+                    (Controls["eButton" + i + j] as Button).Enabled = false;
+                    (Controls["eButton" + i + j] as Button).BackColor = Color.FromArgb(213, 223, 242);
+                   
+                }
+            }
+        }
+    
+
         public int SetShip(int i, int j, int deck, int selectedDeck, string location, int[,] map, string forControls)
         {
             if (selectedDeck > 0)
@@ -139,7 +174,10 @@ namespace Sea_War
                             {
                                 int line = iter + i;
                                 map[line, j] = 1;
+                                if (forControls == "myButton")
+                                {
                                     (Controls[forControls + line + j] as Button).BackColor = Color.FromArgb(149, 104, 222);
+                                }
                             }
                             --selectedDeck;
                         }
@@ -167,8 +205,11 @@ namespace Sea_War
                             for (int iter = 0; iter < deck; iter++)
                             {
                                 int line = iter + j;
-                                map[i, line] = 1;                             
+                                map[i, line] = 1;
+                                if (forControls == "myButton")
+                                {
                                     (Controls[forControls + i + line] as Button).BackColor = Color.FromArgb(149, 104, 222);
+                                }
                             }
                             --selectedDeck;
                         }
@@ -206,7 +247,8 @@ namespace Sea_War
                 {
                     EnemyWin alert = new EnemyWin();
                     alert.Show();
-                    
+                    playAgainButton.Visible = true;
+                    playAgainButton.Enabled = true;
                 }
                 EnemyShoot();
             }
@@ -236,7 +278,8 @@ namespace Sea_War
                 {
                     PlayerWin alert = new PlayerWin();
                     alert.Show();
-                    CreateMap();
+                    playAgainButton.Visible = true;
+                    playAgainButton.Enabled = true;
                 }
             }
             else if(enemyMap[i,j]==0)
@@ -246,33 +289,27 @@ namespace Sea_War
                 EnemyShoot();
             }
         }
-
-
         private void playLabel_Click(object sender, EventArgs e)
         {
-            //if (myDecks[0] == 0 && myDecks[1] == 0 && myDecks[2] == 0 && myDecks[3] == 0)
-            //{
-            //    for (int iCords = 1; iCords < 11; iCords++)
-            //        for (int jCords = 1; jCords < 11; jCords++)
-            //        {
-            //            (Controls["eButton" + iCords + jCords] as Button).Enabled = true;
-            //            (Controls["myButton" + iCords + jCords] as Button).Enabled = false;
-            //        }
-            //    enemyGeneration();
-            //}
-            //else
-            //{
-            //    Form2 form2 = new Form2();
-            //    form2.Show();
-            //}
-            for (int iCords = 1; iCords < 11; iCords++)
-                for (int jCords = 1; jCords < 11; jCords++)
-                {
-                    (Controls["eButton" + iCords + jCords] as Button).Enabled = true;
-                    (Controls["eButton" + iCords + jCords] as Button).BackColor = Color.FromArgb(213, 223, 242);
-                    (Controls["myButton" + iCords + jCords] as Button).Enabled = false;
-                }
-            fieldGeneration(eDecks,enemyMap,"eButton");
+            if (myDecks[0] == 0 && myDecks[1] == 0 && myDecks[2] == 0 && myDecks[3] == 0)
+            {
+                for (int iCords = 1; iCords < 11; iCords++)
+                    for (int jCords = 1; jCords < 11; jCords++)
+                    {
+                        (Controls["eButton" + iCords + jCords] as Button).Enabled = true;
+                        (Controls["myButton" + iCords + jCords] as Button).Enabled = false;
+                    }
+                clearButton.Enabled = false;
+                random_Button.Enabled = false;
+                playLabel.Enabled = false;
+                fieldGeneration(eDecks, enemyMap, "eButton");
+            }
+            else
+            {
+                Form2 form2 = new Form2();
+                form2.Show();
+            }
+        
         }
         static int RandCoords(Random random)
         {
@@ -296,7 +333,7 @@ namespace Sea_War
             }
             
         }
-            private void ExitLabel_ExitGame(object sender, EventArgs e)
+        private void ExitLabel_ExitGame(object sender, EventArgs e)
         {
             this.Close();
         }
@@ -319,6 +356,13 @@ namespace Sea_War
         private void random_Button_Click(object sender, EventArgs e)
         {
             fieldGeneration(myDecks, myMap,"myButton");
+        }
+
+        private void playAgainButton_Click(object sender, EventArgs e)
+        {
+            playAgainButton.Enabled = false;
+            playAgainButton.Visible = false;
+            ClearField();
         }
     }
 }

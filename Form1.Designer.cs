@@ -43,6 +43,7 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.clearButton = new System.Windows.Forms.Button();
             this.random_Button = new System.Windows.Forms.Button();
+            this.playAgainButton = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -220,6 +221,22 @@
             this.random_Button.UseVisualStyleBackColor = false;
             this.random_Button.Click += new System.EventHandler(this.random_Button_Click);
             // 
+            // playAgainButton
+            // 
+            this.playAgainButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.playAgainButton.BackColor = System.Drawing.Color.Thistle;
+            this.playAgainButton.Enabled = false;
+            this.playAgainButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.playAgainButton.Location = new System.Drawing.Point(763, 456);
+            this.playAgainButton.Margin = new System.Windows.Forms.Padding(0);
+            this.playAgainButton.Name = "playAgainButton";
+            this.playAgainButton.Size = new System.Drawing.Size(181, 58);
+            this.playAgainButton.TabIndex = 13;
+            this.playAgainButton.Text = "Play Again";
+            this.playAgainButton.UseVisualStyleBackColor = false;
+            this.playAgainButton.Visible = false;
+            this.playAgainButton.Click += new System.EventHandler(this.playAgainButton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -228,6 +245,7 @@
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1020, 543);
+            this.Controls.Add(this.playAgainButton);
             this.Controls.Add(this.random_Button);
             this.Controls.Add(this.clearButton);
             this.Controls.Add(this.panel2);
@@ -266,6 +284,7 @@
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button clearButton;
         private System.Windows.Forms.Button random_Button;
+        private System.Windows.Forms.Button playAgainButton;
     }
 }
 
